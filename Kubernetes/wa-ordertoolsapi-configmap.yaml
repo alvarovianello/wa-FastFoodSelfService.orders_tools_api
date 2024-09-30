@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: wa-ordertoolsapi-configmap
+data:
+  ASPNETCORE_ENVIRONMENT: "Development"
+  ConnectionStrings__DefaultConnection: "Server=postgres;Port=5432;Database=Lanchonete;User Id=postgres;Password=admin;"
+  ExternalServices__ProductsApiUrl: "http://localhost:5001"
+  ExternalServices__CustomersApiUrl: "http://localhost:5002"
+  ExternalServices__PaymentsApiUrl: "http://localhost:5003"

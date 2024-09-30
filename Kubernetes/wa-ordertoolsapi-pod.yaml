@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: wa-ordertoolsapi
+  labels:
+    app: wa-ordertoolsapi
+spec:
+  containers:
+    - name: wa-ordertoolsapi-container
+      image: willmarques/wa-fastfoodselfservice.orders_tools_api:latest
+      ports:
+        - containerPort: 5004
+      envFrom:
+        - configMapRef:
+            name: wa-ordertoolsapi-configmap
