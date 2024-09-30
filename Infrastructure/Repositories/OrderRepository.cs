@@ -127,7 +127,7 @@ namespace Infrastructure.Repositories
                     await connection.ExecuteAsync(queryOrderStatus, new
                     {
                         OrderId = orderId,
-                        Status = EnumOrderStatus.Recebido.ToString()
+                        Status = order.Status
                     }, transaction);
 
                     await transaction.CommitAsync();

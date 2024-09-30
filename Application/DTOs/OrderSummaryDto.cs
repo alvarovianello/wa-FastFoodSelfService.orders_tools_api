@@ -10,7 +10,7 @@ namespace Application.DTOs
         public string? OrderNumber { get; set; }
         public decimal? TotalPrice { get; set; }
         public DateTime CreatedAt { get; set; }
-        public EnumOrderStatus Status { get; set; } = EnumOrderStatus.Recebido;
+        public string Status { get; set; } = EnumOrderStatus.Recebido.ToString();
         public ICollection<OrderItemDto> OrderItems { get; set; } = new List<OrderItemDto>();
 
         public OrderSummaryDto(Order order, IEnumerable<ProductDto> products)
@@ -20,7 +20,7 @@ namespace Application.DTOs
             OrderNumber = order.OrderNumber;
             TotalPrice = order.TotalPrice;
             CreatedAt = order.CreatedAt;
-            Status = (EnumOrderStatus)order.Status;
+            Status = Enum.GetName(typeof(EnumOrderStatus), order.Status) ?? EnumOrderStatus.Recebido.ToString();
             OrderItems = order.OrderItems.Select(item => new OrderItemDto
             {
                 ProductId = item.ProductId,
