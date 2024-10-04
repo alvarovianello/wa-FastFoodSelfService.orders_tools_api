@@ -74,13 +74,13 @@ namespace Infrastructure.Repositories
         public async Task<IEnumerable<Order>> GetByStatusAsync(EnumOrderStatus status)
         {
             var query = @"SELECT o.id, o.customer_id as CustomerId, o.order_number as OrderNumber, o.total_price as TotalPrice, o.created_at as CreatedAt, o.status AS Status
-                      FROM dbo.Orders
-                      WHERE status = @Status 
+                      FROM dbo.Orders o
+                      WHERE o.status = @Status 
                       ORDER BY created_at DESC";
 
             using (var connection = CreateConnection())
             {
-                var orders = await connection.QueryAsync<Order>(query, new { Status = status.ToString() });
+                var orders = await connection.QueryAsync<Order>(query, new { Status = (int)status });
                 foreach (var order in orders)
                 {
                     order.OrderItems = (await GetOrderItemsAsync(order.Id)).ToList();

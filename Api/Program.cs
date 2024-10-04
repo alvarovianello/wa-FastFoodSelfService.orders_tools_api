@@ -1,4 +1,5 @@
 using Api.Extensions;
+using Newtonsoft.Json.Converters;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,10 +8,17 @@ builder.Services.ApplySwaggerConfiguration(
     applicationName: "FastFood", applicationDescription: "FastFood API V1 - Order Tools");
 
 
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .AddNewtonsoftJson(options =>
+    {
+        options.SerializerSettings.Converters.Add(new StringEnumConverter());
+    });
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddSwaggerGenNewtonsoftSupport(); 
+
 builder.AddResolveDependencies();
 
 var app = builder.Build();

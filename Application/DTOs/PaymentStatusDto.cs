@@ -6,6 +6,6 @@ namespace Application.DTOs
     {
         public int Id { get; set; }
         public int OrderId { get; set; }
-        public EnumStatusPayment Status { get; set; }
+        public string Status { get; set; }
     }
 }

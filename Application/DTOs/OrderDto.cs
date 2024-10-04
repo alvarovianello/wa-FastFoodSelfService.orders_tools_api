@@ -30,7 +30,8 @@ namespace Application.DTOs
                 Quantity = item.Quantity,
                 TotalPrice = item.TotalPrice,
                 PriceItem = products.FirstOrDefault(p => p.Id == item.ProductId)?.Price ?? 0,
-                ProductName = products.FirstOrDefault(p => p.Id == item.ProductId)?.Name
+                ProductName = products.FirstOrDefault(p => p.Id == item.ProductId)?.Name,
+                Description = products.FirstOrDefault(p => p.Id == item.ProductId)?.Description,
             }).ToList();
             Customer = customer;
         }

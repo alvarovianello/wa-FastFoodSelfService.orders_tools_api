@@ -19,7 +19,7 @@ namespace Infrastructure.ExternalServices
         public async Task<PaymentStatusDto?> GetPaymentByOrderIdAsync(int orderId)
         {
             var paymentsApiUrl = _configuration["ExternalServices:PaymentsApiUrl"];
-            var response = await _httpClient.GetAsync($"{paymentsApiUrl}/api/payments/order/{orderId}");
+            var response = await _httpClient.GetAsync($"{paymentsApiUrl}/api/payment/order/{orderId}");
 
             if (!response.IsSuccessStatusCode)
             {
@@ -34,7 +34,7 @@ namespace Infrastructure.ExternalServices
         public async Task<IEnumerable<PaymentStatusDto?>> GetApprovedPaymentsAsync(int limit)
         {
             var paymentsApiUrl = _configuration["ExternalServices:PaymentsApiUrl"];
-            var response = await _httpClient.GetAsync($"{paymentsApiUrl}/api/payment/approved?limit={limit}");
+            var response = await _httpClient.GetAsync($"{paymentsApiUrl}/api/payment/approved/{limit}");
 
             if (!response.IsSuccessStatusCode)
             {

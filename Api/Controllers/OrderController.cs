@@ -2,6 +2,7 @@
 using Application.Interfaces.UseCases;
 using Domain.Enums;
 using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 
 namespace Api.Controllers
 {
@@ -182,7 +183,9 @@ namespace Api.Controllers
         {
             try
             {
-                var orders = await _getOrderByStatus.ExecuteAsync(status);
+                EnumOrderStatus statusEnum = (EnumOrderStatus)Enum.Parse(typeof(EnumOrderStatus), status.ToString());
+
+                var orders = await _getOrderByStatus.ExecuteAsync(statusEnum);
                 return Ok(orders);
             }
             catch (Exception ex)

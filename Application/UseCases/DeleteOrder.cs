@@ -25,7 +25,7 @@ namespace Application.UseCases
             }
 
             var payment = await _paymentService.GetPaymentByOrderIdAsync(orderId);
-            if (payment != null && payment.Status != EnumStatusPayment.Pending)
+            if (payment != null && payment.Status != EnumStatusPayment.Pending.ToString())
             {
                 throw new Exception("O pedido não pode ser excluído porque o pagamento já foi realizado.");
             }
