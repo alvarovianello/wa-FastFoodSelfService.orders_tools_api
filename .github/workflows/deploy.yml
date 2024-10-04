@@ -64,9 +64,9 @@ jobs:
 
       - name: Apply Kubernetes configurations
         run: |
-          kubectl apply -f Kubernetes/wa-customersmanagerapi-configmap.yaml
-          kubectl apply -f Kubernetes/wa-customersmanagerapi-deployment.yaml 
-          kubectl apply -f Kubernetes/wa-customersmanagerapi-hpa.yaml
-          kubectl apply -f Kubernetes/wa-customersmanagerapi-pod.yaml
-          kubectl apply -f Kubernetes/wa-customersmanagerapi-pvc.yaml
-          kubectl apply -f Kubernetes/wa-customersmanagerapi-service.yaml
+          kubectl apply -f Kubernetes/wa-ordertoolsapi-configmap.yaml
+          kubectl apply -f Kubernetes/wa-ordertoolsapi-deployment.yaml 
+          kubectl apply -f Kubernetes/wa-ordertoolsapi-hpa.yaml
+          kubectl apply -f Kubernetes/wa-ordertoolsapi-pod.yaml
+          kubectl apply -f Kubernetes/wa-ordertoolsapi-pvc.yaml
+          kubectl apply -f Kubernetes/wa-ordertoolsapi-service.yaml
