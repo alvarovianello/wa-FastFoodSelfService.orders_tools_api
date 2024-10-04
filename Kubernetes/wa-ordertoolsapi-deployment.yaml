@@ -11,7 +11,7 @@ spec:
     spec:
       containers:
         - name: wa-ordertoolsapi-container
-          image: 659767469388.dkr.ecr.us-east-1.amazonaws.com/wa-fastfood/wa-fastfoodselfservice.orders_tools_api:latest
+          image: 987539726102.dkr.ecr.us-east-1.amazonaws.com/wa-fastfood/wa-fastfoodselfservice.orders_tools_api:latest
           ports:
             - containerPort: 5004
           envFrom:
@@ -26,11 +26,11 @@ spec:
             initialDelaySeconds: 20
           readinessProbe:
             httpGet:
-              path: /
+              path: /api/v1/health
               port: 5004
             periodSeconds: 10
             failureThreshold: 5
-            initialDelaySeconds: 3
+            initialDelaySeconds: 20
           resources:
             requests:
               cpu: 10m

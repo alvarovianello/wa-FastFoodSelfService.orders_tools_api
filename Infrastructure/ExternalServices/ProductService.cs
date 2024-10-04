@@ -19,7 +19,7 @@ namespace Infrastructure.ExternalServices
         public async Task<ProductDto?> GetProductByIdAsync(int productId)
         {
             var productsApiUrl = _configuration["ExternalServices:ProductsApiUrl"];
-            var response = await _httpClient.GetAsync($"{productsApiUrl}/api/products/{productId}");
+            var response = await _httpClient.GetAsync($"{productsApiUrl}/api/product/{productId}");
 
             if (!response.IsSuccessStatusCode)
             {
@@ -39,11 +39,11 @@ namespace Infrastructure.ExternalServices
             if (productIds != null && productIds.Length > 0)
             {
                 var idsQuery = string.Join(",", productIds);
-                requestUri = $"{productsApiUrl}/api/products/all?productIds={idsQuery}";
+                requestUri = $"{productsApiUrl}/api/product/all?productIds={idsQuery}";
             }
             else
             {
-                requestUri = $"{productsApiUrl}/api/products/all";
+                requestUri = $"{productsApiUrl}/api/product/all";
             }
 
             var response = await _httpClient.GetAsync(requestUri);
