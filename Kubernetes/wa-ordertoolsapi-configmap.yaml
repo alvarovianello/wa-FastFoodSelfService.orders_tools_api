@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: wa-ordertoolsapi-configmap
+data:
+  ASPNETCORE_ENVIRONMENT: "Production"
+  ConnectionStrings__DefaultConnection: "Server=fastfood-db.czbnxjpgfykv.us-east-1.rds.amazonaws.com;Port=5432;Database=FastFoodDB;User Id=postgres;Password=FastFoodDB#321;"
+  ExternalServices__ProductsApiUrl: "http://wa-productstoolsapi-service:5001"
+  ExternalServices__CustomersApiUrl: "http://wa-customersmanagerapi-service:5002"
+  ExternalServices__PaymentsApiUrl: "http://wa-paymentsgatewayapi-service:5003"

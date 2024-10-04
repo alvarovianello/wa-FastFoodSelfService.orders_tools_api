@@ -1,0 +1,52 @@
+version: '3.8'
+
+services:
+  wa-ordertoolsapi:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5004:5004"
+    depends_on:
+      - db
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=Server=postgres;Port=5432;Database=Lanchonete;User Id=postgres;Password=admin;;
+      - ExternalServices__ProductsApiUrl=http://localhost:5001
+      - ExternalServices__CustomersApiUrl=http://localhost:5002
+      - ExternalServices__PaymentsApiUrl=http://localhost:5003
+    networks:
+      - wa-ordertoolsapi-network
+
+  db:
+    image: postgres:13
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: Lanchonete
+    volumes:
+      - db_data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - wa-ordertoolsapi-network
+
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "5050:80"
+    depends_on:
+      - db
+    networks:
+      - wa-ordertoolsapi-network
+
+networks:
+  wa-ordertoolsapi-network:
+    driver: bridge
+
+volumes:
+  db_data:

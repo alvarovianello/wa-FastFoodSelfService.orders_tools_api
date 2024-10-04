@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wa-ordertoolsapi-deployment
+spec:
+  template:
+    metadata:
+      name: wa-ordertoolsapi
+      labels:
+        app: wa-ordertoolsapi
+    spec:
+      containers:
+        - name: wa-ordertoolsapi-container
+          image: 659767469388.dkr.ecr.us-east-1.amazonaws.com/wa-fastfood/wa-fastfoodselfservice.orders_tools_api:latest
+          ports:
+            - containerPort: 5004
+          envFrom:
+            - configMapRef:
+                name: wa-ordertoolsapi-configmap
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 5004
+            periodSeconds: 10
+            failureThreshold: 3
+            initialDelaySeconds: 20
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 5004
+            periodSeconds: 10
+            failureThreshold: 5
+            initialDelaySeconds: 3
+          resources:
+            requests:
+              cpu: 10m
+  replicas: 2
+  selector:
+    matchLabels:
+      app: wa-ordertoolsapi
